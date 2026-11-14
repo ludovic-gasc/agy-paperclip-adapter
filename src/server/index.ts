@@ -152,8 +152,8 @@ export function getAgyConfigSchema(): AdapterConfigSchema {
         key: "printTimeout",
         label: "Print timeout (--print-timeout)",
         type: "text",
-        default: "15m",
-        hint: "CLI print mode timeout (e.g. 15m, 30m, 1h, or 0 to disable). Defaults to 15m.",
+        default: "24h",
+        hint: "CLI print mode timeout (e.g. 30m, 1h, 24h, or 0 to disable). Defaults to 24h.",
       },
       {
         key: "sandbox",

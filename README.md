@@ -11,7 +11,7 @@ External `agy_local` adapter plugin for [Paperclip](https://github.com/paperclip
   - Preserves multi-line Markdown comments/summaries without `firstLine()` truncation or raw NDJSON fallback dumps.
   - Emits `resultJson.finalResponse` cleanly and isolates recovered mid-run `TOOL_ERROR` events so successful runs are not falsely marked failed.
   - Defaults `sandbox` to `false` (configurable per agent), resolves realpath targets of agent skill symlinks and instruction directories into `--add-dir`, and passes valid `--settings` overrides (`enableTerminalSandbox`, `allowNonWorkspaceAccess`, `toolPermission`).
-  - Uses `--print-timeout` (default `15m`) and `--disable-slash-commands` (default `true`) for reliable headless execution.
+  - Uses `--print-timeout` (default `24h`, or aligned to `timeoutSec`) and `--disable-slash-commands` (default `true`) for reliable headless execution.
 
 ## Credits & License
 

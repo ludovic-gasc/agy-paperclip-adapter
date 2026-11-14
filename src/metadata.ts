@@ -46,10 +46,10 @@ Core fields:
 - mode (string, optional): execution mode (agent | ask | plan)
 - dangerouslySkipPermissions (boolean, optional, default false): allow non-interactive tool calls without prompting
 - project (string, optional): Antigravity project ID or project name passed via --project
-- printTimeout (string, optional, default "15m"): CLI print mode timeout (e.g. "15m", "30m", "1h", or "0" to disable)
+- printTimeout (string, optional, default "24h"): CLI print mode timeout (e.g. "30m", "1h", "24h", or "0" to disable)
 - disableSlashCommands (boolean, optional, default true): disable slash command and skill expansion in print mode (--disable-slash-commands)
 - agent (string, optional): optional Antigravity subagent persona name passed via --agent <name>
-- sandbox (boolean, optional, default true): run in sandbox with terminal restrictions enabled (--sandbox)
+- sandbox (boolean, optional, default false): run in sandbox with terminal restrictions enabled (--sandbox)
 - jsonSchema (string, optional): JSON schema string or path to schema file to enforce structured output (--json-schema)
 - addDirs (string[], optional): additional workspace directories passed via --add-dir
 - workspaceStrategy (object, optional): execution workspace strategy; currently supports { type: "git_worktree", baseRef?, branchTemplate?, worktreeParentDir? }

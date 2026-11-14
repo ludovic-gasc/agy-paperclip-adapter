@@ -411,7 +411,7 @@ describe("agy-local execute", () => {
         expect(commandArgs).toContain("--settings");
         expect(commandArgs).toContain("--disable-slash-commands");
     });
-    it("defaults --print-timeout to 15m when unset and respects explicit opt-out flags", async () => {
+    it("defaults --print-timeout to 24h when unset and respects explicit opt-out flags", async () => {
         let capturedMeta = null;
         const baseCtx = {
             runtime: {
@@ -452,7 +452,7 @@ describe("agy-local execute", () => {
         }));
         expect(defaultArgs).toContain("--disable-slash-commands");
         expect(defaultArgs).toContain("--print-timeout");
-        expect(defaultArgs[defaultArgs.indexOf("--print-timeout") + 1]).toBe("15m");
+        expect(defaultArgs[defaultArgs.indexOf("--print-timeout") + 1]).toBe("24h");
         expect(defaultArgs).not.toContain("--dangerously-skip-permissions");
         await execute({
             ...baseCtx,

@@ -476,7 +476,7 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
     const effectivePrintTimeout =
       rawPrintTimeout === "0"
         ? ""
-        : rawPrintTimeout || (timeoutSec > 0 ? `${timeoutSec}s` : "15m");
+        : rawPrintTimeout || (timeoutSec > 0 ? `${timeoutSec}s` : "24h");
     if (effectivePrintTimeout) {
       args.push("--print-timeout", effectivePrintTimeout);
     }

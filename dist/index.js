@@ -1,4 +1,4 @@
-// agy-paperclip-adapter/src/metadata.ts
+// src/metadata.ts
 var type = "agy_local";
 var label = "Antigravity (agy)";
 var DEFAULT_AGY_LOCAL_MODEL = "gemini-3.8-flash-high";
@@ -44,10 +44,10 @@ Core fields:
 - mode (string, optional): execution mode (agent | ask | plan)
 - dangerouslySkipPermissions (boolean, optional, default false): allow non-interactive tool calls without prompting
 - project (string, optional): Antigravity project ID or project name passed via --project
-- printTimeout (string, optional, default "15m"): CLI print mode timeout (e.g. "15m", "30m", "1h", or "0" to disable)
+- printTimeout (string, optional, default "24h"): CLI print mode timeout (e.g. "30m", "1h", "24h", or "0" to disable)
 - disableSlashCommands (boolean, optional, default true): disable slash command and skill expansion in print mode (--disable-slash-commands)
 - agent (string, optional): optional Antigravity subagent persona name passed via --agent <name>
-- sandbox (boolean, optional, default true): run in sandbox with terminal restrictions enabled (--sandbox)
+- sandbox (boolean, optional, default false): run in sandbox with terminal restrictions enabled (--sandbox)
 - jsonSchema (string, optional): JSON schema string or path to schema file to enforce structured output (--json-schema)
 - addDirs (string[], optional): additional workspace directories passed via --add-dir
 - workspaceStrategy (object, optional): execution workspace strategy; currently supports { type: "git_worktree", baseRef?, branchTemplate?, worktreeParentDir? }
@@ -69,10 +69,10 @@ Notes:
 - Live structured execution logs and tool calls render in the Paperclip UI via \`./ui-parser\` (contract 1.0.0).
 `;
 
-// agy-paperclip-adapter/src/server/index.ts
+// src/server/index.ts
 import { asString as asString5, parseObject as parseObject4 } from "@paperclipai/adapter-utils/server-utils";
 
-// agy-paperclip-adapter/src/server/execute.ts
+// src/server/execute.ts
 import fs2 from "node:fs/promises";
 import os2 from "node:os";
 import path2 from "node:path";
@@ -110,7 +110,7 @@ import {
   stringifyPaperclipWakePayload
 } from "@paperclipai/adapter-utils/server-utils";
 
-// agy-paperclip-adapter/src/server/parse.ts
+// src/server/parse.ts
 import {
   asString,
   asNumber,
@@ -383,7 +383,7 @@ function isAgyUnknownSessionError(input) {
   );
 }
 
-// agy-paperclip-adapter/src/server/skills.ts
+// src/server/skills.ts
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -566,7 +566,7 @@ function describeRunSkillSync(sync) {
   return lines;
 }
 
-// agy-paperclip-adapter/src/server/models.ts
+// src/server/models.ts
 import { runChildProcess } from "@paperclipai/adapter-utils/server-utils";
 function parseAgyModelsOutput(output) {
   const models2 = [];
@@ -619,7 +619,7 @@ function inferModelProvider(model) {
   return "google";
 }
 
-// agy-paperclip-adapter/src/server/execute.ts
+// src/server/execute.ts
 var __moduleDir2 = path2.dirname(fileURLToPath2(import.meta.url));
 function firstNonEmptyLine(text) {
   return text.split(/\r?\n/).map((line) => line.trim()).find(Boolean) ?? "";
@@ -943,7 +943,7 @@ The above agent instructions were loaded from ${resolvedInstructionsFilePath}. R
     if (project) {
       args.push("--project", project);
     }
-    const effectivePrintTimeout = rawPrintTimeout === "0" ? "" : rawPrintTimeout || (timeoutSec > 0 ? `${timeoutSec}s` : "15m");
+    const effectivePrintTimeout = rawPrintTimeout === "0" ? "" : rawPrintTimeout || (timeoutSec > 0 ? `${timeoutSec}s` : "24h");
     if (effectivePrintTimeout) {
       args.push("--print-timeout", effectivePrintTimeout);
     }
@@ -1119,7 +1119,7 @@ ${artifacts.map((a) => `  - ${a}`).join("\n")}
   return finalResult;
 }
 
-// agy-paperclip-adapter/src/server/test.ts
+// src/server/test.ts
 import {
   asBoolean as asBoolean2,
   asNumber as asNumber3,
@@ -1287,10 +1287,10 @@ async function testEnvironment(ctx) {
   };
 }
 
-// agy-paperclip-adapter/src/server/agents.ts
+// src/server/agents.ts
 import { runChildProcess as runChildProcess2 } from "@paperclipai/adapter-utils/server-utils";
 
-// agy-paperclip-adapter/src/server/index.ts
+// src/server/index.ts
 var sessionCodec = {
   deserialize(raw) {
     if (typeof raw === "string" && raw.trim().length > 0) {
@@ -1384,8 +1384,8 @@ function getAgyConfigSchema() {
         key: "printTimeout",
         label: "Print timeout (--print-timeout)",
         type: "text",
-        default: "15m",
-        hint: "CLI print mode timeout (e.g. 15m, 30m, 1h, or 0 to disable). Defaults to 15m."
+        default: "24h",
+        hint: "CLI print mode timeout (e.g. 30m, 1h, 24h, or 0 to disable). Defaults to 24h."
       },
       {
         key: "sandbox",
