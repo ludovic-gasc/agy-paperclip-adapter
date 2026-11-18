@@ -779,6 +779,10 @@ async function execute(ctx) {
   const runtimeEnv = Object.fromEntries(
     Object.entries(rawEnv).filter((entry) => typeof entry[1] === "string")
   );
+  delete runtimeEnv.NOTIFY_SOCKET;
+  delete runtimeEnv.LISTEN_FDS;
+  delete runtimeEnv.LISTEN_PID;
+  delete runtimeEnv.LISTEN_FDNAMES;
   const timeoutSec = resolveAdapterExecutionTargetTimeoutSec(
     executionTarget,
     asNumber2(config.timeoutSec, 0)
@@ -1066,6 +1070,7 @@ The above agent instructions were loaded from ${resolvedInstructionsFilePath}. R
       billingType: "subscription",
       costUsd: attempt.parsed.costUsd ?? 0,
       resultJson: {
+        conversationContinuation: "continue_conversation_v1",
         stdout: attempt.proc.stdout,
         stderr: attempt.proc.stderr,
         ...attempt.parsed.resultJson ? attempt.parsed.resultJson : {},

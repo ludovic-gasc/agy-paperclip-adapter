@@ -283,6 +283,10 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
   const runtimeEnv: Record<string, string> = Object.fromEntries(
     Object.entries(rawEnv).filter((entry): entry is [string, string] => typeof entry[1] === "string"),
   );
+  delete runtimeEnv.NOTIFY_SOCKET;
+  delete runtimeEnv.LISTEN_FDS;
+  delete runtimeEnv.LISTEN_PID;
+  delete runtimeEnv.LISTEN_FDNAMES;
 
   const timeoutSec = resolveAdapterExecutionTargetTimeoutSec(
     executionTarget,
@@ -630,6 +634,7 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
       billingType: "subscription",
       costUsd: attempt.parsed.costUsd ?? 0,
       resultJson: {
+        conversationContinuation: "continue_conversation_v1",
         stdout: attempt.proc.stdout,
         stderr: attempt.proc.stderr,
         ...(attempt.parsed.resultJson ? attempt.parsed.resultJson : {}),
